@@ -1,0 +1,28 @@
+@startuml
+
+title Camera & Python Interaction
+
+
+Camera->Python : photo taken
+note left
+    Motion Sensor Trigger
+    * gpiozero library
+    * infinite loop
+    * when we detect motion, picamera tells camera to take photo
+end note
+Python->OpenALPR : http request
+
+OpenALPR->Python : http response
+
+Python->LicensePlatesFile : check plate against known list
+note left
+    File processing
+    * Each line of file is a license plate number
+    * Read each line and compare to response from OpenALPR
+end note
+Python->NotificationService
+note right
+    TODO
+end note
+
+@enduml
